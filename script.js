@@ -41,6 +41,9 @@ function go(id) {
   const vid = $('#vid');
   if (vid && id !== 'song' && !vid.paused) {
     vid.pause();
+    if (typeof bgm !== 'undefined' && bgm) {
+      bgm.play().catch(() => {});
+    }
   }
 
   if (id === 'memories') {
@@ -49,7 +52,7 @@ function go(id) {
   }
   if (id === 'flowers') type($('#ftext'), FLOWERS_TEXT);
   if (id === 'song' && vid) {
-    if (!vid.src) vid.src = VIDEO_SRC;
+    if (!vid.src && typeof VIDEO_SRC !== 'undefined') vid.src = VIDEO_SRC;
     vid.play().catch(() => {});
   }
 }
